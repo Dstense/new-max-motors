@@ -16,8 +16,9 @@ function filterCars() {
     return matchesText && (brand === 'all' || card.dataset.brand === brand) && (fuel === 'all' || card.dataset.fuel === fuel);
   });
   const sortedCards = [...visibleCards];
-  if (sortFilter.value === 'low-high') sortedCards.sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price));
-  if (sortFilter.value === 'high-low') sortedCards.sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price));
+  const priceOf = (card) => card.dataset.price && card.dataset.price.trim() !== '' ? Number(card.dataset.price) : null;
+  if (sortFilter.value === 'low-high') sortedCards.sort((a, b) => { const pa = priceOf(a); const pb = priceOf(b); if (pa === null) return pb === null ? 0 : 1; if (pb === null) return -1; return pa - pb; });
+  if (sortFilter.value === 'high-low') sortedCards.sort((a, b) => { const pa = priceOf(a); const pb = priceOf(b); if (pa === null) return pb === null ? 0 : 1; if (pb === null) return -1; return pb - pa; });
   cards.forEach((card) => { card.hidden = true; });
   sortedCards.forEach((card) => { card.hidden = false; carGrid.appendChild(card); });
   resultsCount.textContent = `${visibleCards.length} featured ${visibleCards.length === 1 ? 'listing' : 'listings'}`;

@@ -33,3 +33,19 @@ A responsive, static website for NEW MAX MOTORS, a used-car dealer in Goregaon E
 ## Deploy on Netlify
 
 Static site; set the publish directory to the repository root (`.`) and leave the build command blank.
+
+## Facebook inventory added (indexed on 8 November 2026)
+
+Firecrawl Search found public Facebook posts labelled NEW MAX MOTORS for the following cars. They have been added as enquiries with their original source post links:
+
+- Kia Seltos HTX Plus D1.5 6AT, 2019 — 96,000 km shown in the search snippet; source: https://www.facebook.com/groups/930241221170316/posts/2241606543367104/
+- Tata Punch Pure 1.2 CNG, 2023 — 70,000 km, first owner and company-fitted CNG stated in the snippet; source: https://www.facebook.com/amin.tamboli.79/posts/%EF%B8%8Fnew-max-motors%EF%B8%8Ftata-punch-pur-12-cng-2023-model-1st-owner-insurance-valid-70000/3392642680905758/
+- Mahindra Thar Roxx AX7L D AT 4WD, 2026 — 9,400 km and first owner stated; source: https://www.facebook.com/groups/202230208756836/posts/1298645039115342/
+- Honda Accord 2.4 i-VTEC AT, 2010 — 52,000 km and second owner stated; source: https://www.facebook.com/amin.tamboli.79/posts/%EF%B8%8Fnew-max-motors%EF%B8%8Fhonda-accord-24-i-vtec-at-2010-model-2nd-owner-insurance-no-5200/3471638526339506/
+- Volkswagen Vento 1.5 TDI Highline AT, 2016 — 75,000 km and first owner stated; source: https://www.facebook.com/amin.tamboli.79/posts/%EF%B8%8Fnew-max-motors%EF%B8%8Fvw-vento-15-tdi-highline-at-2016-model-1st-ownerinsurance-valid-/3422891601214199/
+- Audi A6 Matrix 2.0 TDI, 2012 — fourth owner, diesel automatic and sunroof mentioned; odometer unit/value not confidently extracted; source: https://www.facebook.com/amin.tamboli.79/videos/%EF%B8%8Fnew-max-motors%EF%B8%8Faudi-a6-matrix-20-tdi-2012-model-4th-owner-insurance-valid68000-/1609851050798132/
+- Kia Sonet D1.5 6AT HTK Plus, 2021 — source: https://www.facebook.com/groups/3681542415277998/posts/27708652832140287/
+- BMW 5 Series 520d Luxury Line, 2013 — first owner and comprehensive insurance mentioned; source: https://www.facebook.com/amin.tamboli.79/videos/%EF%B8%8Fnew-max-motors%EF%B8%8Fbmw-5series-520d-luxury-line-2013-model-1st-owner-comprehensive-/1064588239398465/
+- Ford Endeavour 3.2L Titanium 4WD AT, 2019 — first owner mentioned; source: https://www.facebook.com/amin.tamboli.79/videos/%EF%B8%8Fnew-max-motors%EF%B8%8Fford-endeavour-32l-titanium-4wd-at-2019-model-1st-owner-insuranc/1043410268572419/
+
+Important: Firecrawl Search returned indexed snippets, but direct Firecrawl scraping of Facebook URLs was blocked (HTTP 403). Thus the cards link back to public source posts, car prices are marked "Price on request" unless an asking price is separately confirmed, and images are model-reference photos rather than verified vehicle photographs. Reconfirm each post and vehicle details with the dealer before treating a listing as live stock.
