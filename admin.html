@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111715">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Inventory Admin | NEW MAX MOTORS</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body class="admin-body">
+  <div class="admin-shell">
+    <header class="admin-topbar">
+      <a class="admin-brand" href="/" aria-label="NEW MAX MOTORS website">
+        <span class="admin-brand-mark">NM</span>
+        <span><strong>NEW MAX MOTORS</strong><small>INVENTORY CONTROL</small></span>
+      </a>
+      <div class="topbar-actions">
+        <a class="quiet-link" href="/" target="_blank" rel="noopener">View website <span aria-hidden="true">↗</span></a>
+        <button class="button button-quiet" id="logoutButton" type="button" hidden>Log out</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="login-layout" id="loginPanel">
+        <div class="login-story">
+          <p class="eyebrow"><span></span> PRIVATE DEALER WORKSPACE</p>
+          <h1>Your stock.<br><em>Your control.</em></h1>
+          <p class="login-copy">Add vehicles, correct asking prices, refresh photos and remove cars that have been sold. Inventory changes are saved to GitHub and published through Netlify.</p>
+          <div class="login-points"><span>01 <b>Manage listings</b></span><span>02 <b>Keep details current</b></span><span>03 <b>Publish for every visitor</b></span></div>
+        </div>
+        <div class="login-card">
+          <div class="login-icon" aria-hidden="true">↗</div>
+          <p class="eyebrow eyebrow-muted">ADMIN SIGN IN</p>
+          <h2>Welcome back.</h2>
+          <p class="muted">Sign in with the admin password configured in your Netlify site environment.</p>
+          <form id="loginForm">
+            <label for="adminPassword">Admin password</label>
+            <input id="adminPassword" name="password" type="password" autocomplete="current-password" required placeholder="Enter your secure password">
+            <button class="button button-primary button-wide" id="loginButton" type="submit">Unlock inventory <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="status-message" id="loginStatus" role="status" aria-live="polite"></p>
+          <p class="login-footnote"><span aria-hidden="true">◈</span> Protected by a server-side Netlify function. No password is stored in this page.</p>
+        </div>
+      </section>
+
+      <section class="dashboard" id="dashboard" hidden>
+        <div class="dashboard-heading">
+          <div><p class="eyebrow"><span></span> INVENTORY OVERVIEW</p><h1>Cars in your <em>showroom.</em></h1><p class="muted">Changes are saved to the source inventory. Netlify then deploys the updated public site.</p></div>
+          <div class="publish-state"><span class="live-dot"></span><span><strong>Connected inventory</strong><small>GitHub · Netlify deploy</small></span></div>
+        </div>
+
+        <div class="stats-grid" aria-label="Inventory summary">
+          <article class="stat-card"><span class="stat-label">TOTAL LISTINGS</span><strong id="totalCount">—</strong><small>Cars in your inventory</small></article>
+          <article class="stat-card"><span class="stat-label">PRICED CARS</span><strong id="pricedCount">—</strong><small>With an asking price</small></article>
+          <article class="stat-card"><span class="stat-label">PHOTO CHECK</span><strong id="photoCount">—</strong><small>Need a photo or exact vehicle image</small></article>
+        </div>
+
+        <div class="workspace-grid">
+          <section class="editor-panel">
+            <div class="panel-heading"><div><p class="eyebrow eyebrow-muted">LISTING DETAILS</p><h2 id="formTitle">Add a car</h2></div><span class="step-number" id="formStep">01</span></div>
+            <p class="panel-intro">Enter the vehicle details below. Leave the price empty to display “Price on request”.</p>
+            <form id="carForm">
+              <input id="carId" type="hidden">
+              <div class="form-grid">
+                <div class="field field-full"><label for="carName">Car name <span>*</span></label><input id="carName" name="name" required maxlength="140" placeholder="e.g. Hyundai Creta SX(O)"></div>
+                <div class="field"><label for="carBrand">Brand <span>*</span></label><input id="carBrand" name="brandName" required maxlength="80" placeholder="e.g. Hyundai"></div>
+                <div class="field"><label for="carYear">Model year <span>*</span></label><input id="carYear" name="year" type="number" required min="1980" max="2100" step="1" placeholder="2022"></div>
+                <div class="field"><label for="carPrice">Asking price (₹)</label><input id="carPrice" name="price" type="number" min="0" max="500000000" step="1" inputmode="numeric" placeholder="e.g. 675000"></div>
+                <div class="field"><label for="carFuel">Fuel type <span>*</span></label><select id="carFuel" name="fuel" required><option value="petrol">Petrol</option><option value="diesel">Diesel</option><option value="cng">Petrol + CNG / CNG</option><option value="electric">Electric</option><option value="hybrid">Hybrid</option><option value="other">Other / not specified</option></select></div>
+                <div class="field"><label for="carCategory">Category label</label><input id="carCategory" name="category" maxlength="80" placeholder="e.g. SUV · AUTOMATIC"></div>
+                <div class="field field-full"><label for="carSpecs">Quick facts <small>One per line</small></label><textarea id="carSpecs" name="specs" rows="4" maxlength="1600" placeholder="e.g. 42,000 km&#10;1st owner&#10;Automatic&#10;Insurance valid"></textarea><span class="field-help">These appear as small chips on the public car card.</span></div>
+                <div class="field field-full"><label for="carDescription">Features and notes</label><textarea id="carDescription" name="description" rows="3" maxlength="1600" placeholder="Sunroof, reverse camera, service history…"></textarea></div>
+                <div class="field field-full"><label for="carImage">Car photo URL</label><input id="carImage" name="imageUrl" type="url" maxlength="1200" placeholder="https://…"><span class="field-help">Use a direct image URL. Uploading image files is not supported in this version.</span></div>
+                <div class="field field-full photo-check-field"><label class="check-label" for="exactPhoto"><input id="exactPhoto" type="checkbox"> <span>This is a photo of the exact vehicle (not a representative model photo).</span></label></div>
+                <div class="field field-full"><label for="carSource">Listing / source link</label><input id="carSource" name="sourceUrl" type="url" maxlength="1200" placeholder="https://…"><span class="field-help">Defaults to the New Max Motors WhatsApp catalogue.</span></div>
+              </div>
+              <div class="form-actions">
+                <button class="button button-primary" id="submitCarButton" type="submit">Add car to website <span aria-hidden="true">→</span></button>
+                <button class="button button-quiet" id="cancelEditButton" type="button" hidden>Cancel edit</button>
+              </div>
+              <p class="status-message form-status" id="formStatus" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section class="inventory-panel">
+            <div class="panel-heading"><div><p class="eyebrow eyebrow-muted">YOUR LISTINGS</p><h2>Manage inventory</h2></div><span class="inventory-count" id="inventoryBadge">0 cars</span></div>
+            <div class="inventory-search"><span aria-hidden="true">⌕</span><input id="adminSearch" type="search" placeholder="Search your cars…" aria-label="Search inventory"></div>
+            <div id="adminInventory" class="admin-inventory" aria-live="polite"><div class="empty-state">Loading your inventory…</div></div>
+          </section>
+        </div>
+        <footer class="admin-footer"><span>NEW MAX MOTORS · GOREGAON EAST, MUMBAI</span><span>Always confirm price, availability and vehicle details before publishing.</span></footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
