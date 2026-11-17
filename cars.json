@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T17:28:11.750Z",
+  "updatedAt": "2026-11-17T17:31:41.916Z",
   "cars": [
     {
       "id": "bmw-2-series-220d-gran-coupe-sportline-1",
@@ -10,7 +10,7 @@
       "category": "LUXURY COUPE · DIESEL",
       "year": 2022,
       "price": null,
-      "priceNote": "Price on request",
+      "priceNote": "Confirm price",
       "imageUrl": "https://imgd.aeplcdn.com/640X480/vimages/202603/4427843_152135_2_1772881106425.jpg?fit=true&qp=40",
       "imageLabel": "MODEL PHOTO",
       "specs": [
@@ -55,8 +55,8 @@
       "fuel": "diesel",
       "category": "LUXURY SUV · 4MATIC",
       "year": 2014,
-      "price": 1299999,
-      "priceNote": "",
+      "price": null,
+      "priceNote": "Confirm price",
       "imageUrl": "https://marketplace-cdn.cars24.com/production/13255107737/exterior/2025-10-02/car_replace_bg_0fcf6b53-2acb-4a94-a561-4854e446e804.png?format=auto&w=700",
       "imageLabel": "MODEL PHOTO",
       "specs": [
@@ -101,8 +101,8 @@
       "fuel": "diesel",
       "category": "MPV · DIESEL",
       "year": 2020,
-      "price": 1499999,
-      "priceNote": "",
+      "price": null,
+      "priceNote": "Confirm price",
       "imageUrl": "https://marketplace-cdn.cars24.com/production/10206604755/exterior/2025-09-17/car_replace_bg_b1dd9e71-dd8e-4a8a-9fb7-a0e47db73856.png",
       "imageLabel": "MODEL PHOTO",
       "specs": [
