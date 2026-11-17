@@ -1,0 +1,366 @@
+{
+  "updatedAt": "2026-11-17T17:28:11.750Z",
+  "cars": [
+    {
+      "id": "bmw-2-series-220d-gran-coupe-sportline-1",
+      "name": "BMW 2 Series 220d Gran Coupe Sportline",
+      "brand": "bmw",
+      "brandName": "BMW",
+      "fuel": "diesel",
+      "category": "LUXURY COUPE · DIESEL",
+      "year": 2022,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://imgd.aeplcdn.com/640X480/vimages/202603/4427843_152135_2_1772881106425.jpg?fit=true&qp=40",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "Automatic",
+        "55,000 km",
+        "1st owner",
+        "Alpine White",
+        "MH 04"
+      ],
+      "description": "Insurance listed valid · Brand-new tyres · Panoramic sunroof · Digital cluster",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "hyundai-aura-1-2-mt-cng-s-2",
+      "name": "Hyundai Aura 1.2 MT CNG S",
+      "brand": "hyundai",
+      "brandName": "Hyundai",
+      "fuel": "cng",
+      "category": "SEDAN · PETROL + CNG",
+      "year": 2023,
+      "price": 675000,
+      "priceNote": "",
+      "imageUrl": "https://imgd.aeplcdn.com/640X480/vimages/202604/4477045_118625_1_1775156270987.jpg?fit=true&qp=80",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Petrol + CNG",
+        "Manual",
+        "41,000 km",
+        "1st owner",
+        "Blue",
+        "MH 47"
+      ],
+      "description": "Company-fitted CNG · Comprehensive insurance listed valid · Tyres 90%",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "mercedes-benz-ml250-cdi-4matic-3",
+      "name": "Mercedes-Benz ML250 CDI 4MATIC",
+      "brand": "mercedes",
+      "brandName": "Mercedes-Benz",
+      "fuel": "diesel",
+      "category": "LUXURY SUV · 4MATIC",
+      "year": 2014,
+      "price": 1299999,
+      "priceNote": "",
+      "imageUrl": "https://marketplace-cdn.cars24.com/production/13255107737/exterior/2025-10-02/car_replace_bg_0fcf6b53-2acb-4a94-a561-4854e446e804.png?format=auto&w=700",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "Automatic",
+        "67,000 miles*",
+        "3rd owner",
+        "Silver",
+        "MH 43"
+      ],
+      "description": "Insurance listed valid · Sunroof · Touchscreen infotainment · 6 airbags",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "maruti-suzuki-celerio-zxi-mt-4",
+      "name": "Maruti Suzuki Celerio ZXI MT",
+      "brand": "maruti",
+      "brandName": "Maruti Suzuki",
+      "fuel": "petrol",
+      "category": "HATCHBACK · PETROL",
+      "year": 2018,
+      "price": 375000,
+      "priceNote": "",
+      "imageUrl": "https://imgd-ct.aeplcdn.com/1056x660/n/cw/ec/120913/maruti-suzuki-xl6-left-front-three-quarter12.jpeg?isig=0&q=80&wm=0",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Petrol",
+        "Manual",
+        "79,000 km",
+        "1st owner",
+        "Grey",
+        "MH 06"
+      ],
+      "description": "Insurance listed valid · Tyres 90%",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "toyota-innova-crysta-2-4-v-mt-5",
+      "name": "Toyota Innova Crysta 2.4 V MT",
+      "brand": "toyota",
+      "brandName": "Toyota",
+      "fuel": "diesel",
+      "category": "MPV · DIESEL",
+      "year": 2020,
+      "price": 1499999,
+      "priceNote": "",
+      "imageUrl": "https://marketplace-cdn.cars24.com/production/10206604755/exterior/2025-09-17/car_replace_bg_b1dd9e71-dd8e-4a8a-9fb7-a0e47db73856.png",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "Manual*",
+        "1,18,000 km",
+        "3rd owner",
+        "8-seater",
+        "GJ 03"
+      ],
+      "description": "Insurance listed valid · Champagne colour · Tyres 90%",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "maruti-suzuki-xl6-zeta-cng-6",
+      "name": "Maruti Suzuki XL6 Zeta CNG",
+      "brand": "maruti",
+      "brandName": "Maruti Suzuki",
+      "fuel": "cng",
+      "category": "MPV · FAMILY",
+      "year": 2025,
+      "price": 1199000,
+      "priceNote": "",
+      "imageUrl": "https://imgd-ct.aeplcdn.com/1056x660/n/cw/ec/120913/maruti-suzuki-xl6-left-front-three-quarter12.jpeg?isig=0&q=80&wm=0",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "CNG / Petrol",
+        "Confirm km"
+      ],
+      "description": "",
+      "sourceUrl": "https://www.olx.in/item/cars-c84-used-maruti-suzuki-xl6-in-andheri-east-mumbai-iid-1853401696"
+    },
+    {
+      "id": "renault-duster-rxs-o-cvt-7",
+      "name": "Renault Duster RXS (O) CVT",
+      "brand": "renault",
+      "brandName": "Renault",
+      "fuel": "petrol",
+      "category": "SUV · AUTOMATIC",
+      "year": 2017,
+      "price": 475000,
+      "priceNote": "",
+      "imageUrl": "https://marketplace-cdn.cars24.com/production/13255107737/exterior/2025-10-02/car_replace_bg_0fcf6b53-2acb-4a94-a561-4854e446e804.png?format=auto&w=700",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Petrol",
+        "66,000 km*"
+      ],
+      "description": "",
+      "sourceUrl": "https://www.olx.in/item/cars-c84-used-renault-duster-in-borivali-east-mumbai-iid-1819420124"
+    },
+    {
+      "id": "kia-seltos-gtx-plus-diesel-at-8",
+      "name": "Kia Seltos GTX Plus Diesel AT",
+      "brand": "kia",
+      "brandName": "Kia",
+      "fuel": "diesel",
+      "category": "SUV · DIESEL",
+      "year": 2022,
+      "price": 1349000,
+      "priceNote": "",
+      "imageUrl": "https://carfinderassets.s3.ap-south-1.amazonaws.com/carFinder/cars/1772700235111-car-thumbnail.webp",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "63,100 km*"
+      ],
+      "description": "",
+      "sourceUrl": "https://www.olx.in/item/cars-c84-used-kia-seltos-in-kurla-east-mumbai-iid-1857090430"
+    },
+    {
+      "id": "kia-seltos-htx-plus-d1-5-6at-9",
+      "name": "Kia Seltos HTX Plus D1.5 6AT",
+      "brand": "kia",
+      "brandName": "Kia",
+      "fuel": "diesel",
+      "category": "SUV · DIESEL AUTOMATIC",
+      "year": 2019,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://carfinderassets.s3.ap-south-1.amazonaws.com/carFinder/cars/1772700235111-car-thumbnail.webp",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "Automatic",
+        "96,000 km",
+        "1st owner"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "tata-punch-pure-1-2-cng-10",
+      "name": "Tata Punch Pure 1.2 CNG",
+      "brand": "tata",
+      "brandName": "Tata",
+      "fuel": "cng",
+      "category": "COMPACT SUV · CNG",
+      "year": 2023,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://imgd.aeplcdn.com/640X480/vimages/202604/4477045_118625_1_1775156270987.jpg?fit=true&qp=80",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Petrol + CNG",
+        "70,000 km",
+        "1st owner",
+        "Insurance listed valid"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "mahindra-thar-roxx-ax7l-d-at-4wd-11",
+      "name": "Mahindra Thar Roxx AX7L D AT 4WD",
+      "brand": "mahindra",
+      "brandName": "Mahindra",
+      "fuel": "diesel",
+      "category": "OFF-ROAD SUV · 4WD",
+      "year": 2026,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://content.carlelo.com/media/news/mahindra-thar-roxx-upgraded-check-out-its-new-features.webp",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "4WD automatic",
+        "9,400 km",
+        "1st owner"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "honda-accord-2-4-i-vtec-at-12",
+      "name": "Honda Accord 2.4 i-VTEC AT",
+      "brand": "honda",
+      "brandName": "Honda",
+      "fuel": "petrol",
+      "category": "SEDAN · AUTOMATIC",
+      "year": 2010,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://marketplace-cdn.cars24.com/production/10206604755/exterior/2025-09-17/car_replace_bg_b1dd9e71-dd8e-4a8a-9fb7-a0e47db73856.png",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Petrol",
+        "Automatic",
+        "52,000 km",
+        "2nd owner"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "volkswagen-vento-1-5-tdi-highline-at-13",
+      "name": "Volkswagen Vento 1.5 TDI Highline AT",
+      "brand": "volkswagen",
+      "brandName": "Volkswagen",
+      "fuel": "diesel",
+      "category": "SEDAN · DIESEL AUTOMATIC",
+      "year": 2016,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://www.xdrivecars.com/assets/images/car_images/Used-cars-in-trivandrum--2402202487376.webp",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "Automatic",
+        "75,000 km",
+        "1st owner"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "audi-a6-matrix-2-0-tdi-14",
+      "name": "Audi A6 Matrix 2.0 TDI",
+      "brand": "audi",
+      "brandName": "Audi",
+      "fuel": "diesel",
+      "category": "LUXURY SEDAN · AUTOMATIC",
+      "year": 2012,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://marketplace-cdn.cars24.com/production/10397867794/exterior/2025-11-25/car_replace_bg_7e873a8c-216d-44a6-9bbe-faa20510cf0e.png",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "Automatic",
+        "4th owner",
+        "Sunroof mentioned"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "kia-sonet-d1-5-6at-htk-plus-15",
+      "name": "Kia Sonet D1.5 6AT HTK Plus",
+      "brand": "kia",
+      "brandName": "Kia",
+      "fuel": "diesel",
+      "category": "COMPACT SUV · DIESEL AT",
+      "year": 2021,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://apollo.olx.in/v1/files/mh2k6wxcvgi01-IN/image",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "Automatic",
+        "Mileage not stated",
+        "Price not verified"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "bmw-5-series-520d-luxury-line-16",
+      "name": "BMW 5 Series 520d Luxury Line",
+      "brand": "bmw",
+      "brandName": "BMW",
+      "fuel": "diesel",
+      "category": "LUXURY SEDAN · DIESEL",
+      "year": 2013,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://imgd.aeplcdn.com/640X480/vimages/202603/4427843_152135_2_1772881106425.jpg?fit=true&qp=40",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "Automatic",
+        "1st owner",
+        "Comprehensive insurance listed"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    },
+    {
+      "id": "ford-endeavour-3-2l-titanium-4wd-at-17",
+      "name": "Ford Endeavour 3.2L Titanium 4WD AT",
+      "brand": "ford",
+      "brandName": "Ford",
+      "fuel": "diesel",
+      "category": "FULL-SIZE SUV · 4WD",
+      "year": 2019,
+      "price": null,
+      "priceNote": "Price on request",
+      "imageUrl": "https://imgd.aeplcdn.com/640X480/vimages/202603/4425231_101299_1772783925383.jpeg?fit=true&qp=80",
+      "imageLabel": "MODEL PHOTO",
+      "specs": [
+        "Diesel",
+        "4WD automatic",
+        "1st owner",
+        "Confirm kilometres"
+      ],
+      "description": "",
+      "sourceUrl": "https://wa.me/c/919257862121"
+    }
+  ]
+}
