@@ -2,3 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://new-max-motors.netlify.app/sitemap.xml
+
+User-agent: *
+Disallow: /admin.html
+Disallow: /api/admin-cars
