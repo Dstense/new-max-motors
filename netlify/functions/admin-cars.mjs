@@ -5,6 +5,9 @@ const REPO = process.env.GITHUB_REPO || "new-max-motors";
 const BRANCH = process.env.GITHUB_BRANCH || "main";
 const CATALOGUE_URL = "https://wa.me/c/919257862121";
 const ALLOWED_FUEL = new Set(["petrol", "diesel", "cng", "electric", "hybrid", "other"]);
+const loginFailures = new Map();
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
+const MAX_LOGIN_FAILURES = 10;
 
 function reply(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -16,6 +19,11 @@ function reply(body, status = 200) {
       "referrer-policy": "no-referrer"
     }
   });
+}
+
+function clientKey(request) {
+  return request.headers.get("x-nf-client-connection-ip") ||
+    (request.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "unknown";
 }
 
 function safeEqual(value, expected) {
@@ -149,9 +157,32 @@ export default async function handler(request) {
       error: "Admin setup is not complete. Add the required environment variables in Netlify: " + missing.join(", ") + "."
     }, 503);
   }
+  if (process.env.ADMIN_PASSWORD.length < 12) {
+    return reply({ error: "For security, ADMIN_PASSWORD must be at least 12 characters long." }, 503);
+  }
+  if (process.env.ADMIN_SESSION_SECRET.length < 32) {
+    return reply({ error: "ADMIN_SESSION_SECRET must be at least 32 characters long." }, 503);
+  }
 
   if (action === "login") {
-    if (!safeEqual(input.password, process.env.ADMIN_PASSWORD)) return reply({ error: "That password did not match." }, 401);
+    const key = clientKey(request);
+    const now = Date.now();
+    if (loginFailures.size > 5000) {
+      for (const [knownKey, attempt] of loginFailures.entries()) {
+        if (attempt.resetAt <= now) loginFailures.delete(knownKey);
+      }
+    }
+    const attempt = loginFailures.get(key);
+    if (attempt && attempt.resetAt > now && attempt.count >= MAX_LOGIN_FAILURES) {
+      return reply({ error: "Too many sign-in attempts. Wait 15 minutes and try again." }, 429);
+    }
+    if (!safeEqual(input.password, process.env.ADMIN_PASSWORD)) {
+      const active = attempt && attempt.resetAt > now ? attempt : { count: 0, resetAt: now + LOGIN_WINDOW_MS };
+      active.count += 1;
+      loginFailures.set(key, active);
+      return reply({ error: "That password did not match." }, 401);
+    }
+    loginFailures.delete(key);
     return reply({ ok: true, token: createSession(), expiresIn: 28800 });
   }
 
