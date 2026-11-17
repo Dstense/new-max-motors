@@ -49,3 +49,34 @@ Firecrawl Search found public Facebook posts labelled NEW MAX MOTORS for the fol
 - Ford Endeavour 3.2L Titanium 4WD AT, 2019 — first owner mentioned; source: https://www.facebook.com/amin.tamboli.79/videos/%EF%B8%8Fnew-max-motors%EF%B8%8Fford-endeavour-32l-titanium-4wd-at-2019-model-1st-owner-insuranc/1043410268572419/
 
 Important: Firecrawl Search returned indexed snippets, but direct Firecrawl scraping of Facebook URLs was blocked (HTTP 403). Thus the cards link back to public source posts, car prices are marked "Price on request" unless an asking price is separately confirmed, and images are model-reference photos rather than verified vehicle photographs. Reconfirm each post and vehicle details with the dealer before treating a listing as live stock.
+
+
+## Secure inventory admin panel
+
+Open `/admin.html` on the deployed site to manage cars. The public car grid reads from `cars.json`; the admin page reads and updates that inventory through a Netlify Function and commits changes to this repository. Each successful save creates a GitHub commit and triggers the site's automatic Netlify deployment. No browser-only storage is used for the shared inventory.
+
+### One-time Netlify setup
+
+In Netlify, open the site's **Project configuration / Site configuration → Environment variables** and add these variables for the production deploy context:
+
+- `ADMIN_PASSWORD`: a long, unique admin password (use at least 12 characters).
+- `ADMIN_SESSION_SECRET`: a random secret with at least 32 characters; do not reuse the admin password.
+- `GITHUB_TOKEN`: a GitHub fine-grained personal access token restricted to this repository (`Dstense/new-max-motors`) with **Contents: Read and write** permission.
+
+Optional variables:
+
+- `GITHUB_OWNER`: defaults to `Dstense`.
+- `GITHUB_REPO`: defaults to `new-max-motors`.
+- `GITHUB_BRANCH`: defaults to `main`.
+
+After saving these variables, trigger a new Netlify deploy (environment variable changes are not applied to an already-running deployment). The token and password must stay in Netlify environment settings only; never add them to HTML, JavaScript or this repository. The admin page uses an expiring server-signed session and the GitHub token remains on the server.
+
+### Admin usage
+
+- Open `https://new-max-motors.netlify.app/admin.html` and sign in with `ADMIN_PASSWORD`.
+- Add a car with its name, brand, year, fuel type, facts, optional price in **rupees**, photo URL and optional source link.
+- Select the exact-vehicle-photo checkbox only when the image really shows that car. Otherwise, the listing is labelled as a model reference photo.
+- Edit details or remove a listing from the inventory list. Leave the price empty to show **Price on request**.
+- After saving, wait for the Netlify deployment to complete before checking the public homepage. The admin dashboard reads the latest saved inventory directly from GitHub.
+
+The admin form currently accepts **direct HTTP/HTTPS image URLs**; it does not upload image files. The first 17 listings are seeded from the existing featured cards, and catalogue listings with unverified or contradictory prices intentionally remain “Price on request”. Confirm availability, model variant, ownership, registration, mileage, price and photo accuracy before publishing a listing.
