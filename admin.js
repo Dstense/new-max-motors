@@ -363,7 +363,6 @@ document.getElementById('uploadPhotoButton').addEventListener('click', async () 
       imageData: prepared.imageData
     });
     document.getElementById('carImage').value = result.path;
-    document.getElementById('exactPhoto').checked = true;
     updatePhotoPreview(result.path, file.name || 'Uploaded car photo');
     fileInput.value = '';
     setStatus(status, 'Photo uploaded (' + Math.round(prepared.bytes / 1024) + ' KB). Save the car listing to attach it. Netlify must finish deploying before the image appears publicly.', 'success');
