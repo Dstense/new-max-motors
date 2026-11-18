@@ -61,6 +61,12 @@ function cleanText(value, max = 250) {
   return String(value == null ? "" : value).trim().slice(0, max);
 }
 
+function safeImageUrl(value) {
+  const url = cleanText(value, 1200);
+  if (/^\/car-images\/[a-z0-9][a-z0-9._-]*\.jpg$/i.test(url)) return url;
+  return safeWebUrl(url, "");
+}
+
 function safeWebUrl(value, fallback = "") {
   const url = cleanText(value, 1200);
   if (!url) return fallback;
@@ -106,7 +112,7 @@ function sanitizeCar(raw) {
     year,
     price,
     priceNote: price === null ? (cleanText(raw.priceNote, 100) || "Price on request") : "",
-    imageUrl: safeWebUrl(raw.imageUrl, ""),
+    imageUrl: safeImageUrl(raw.imageUrl),
     imageLabel: raw.imageLabel === "VEHICLE PHOTO" ? "VEHICLE PHOTO" : "MODEL PHOTO",
     specs,
     description: cleanText(raw.description, 1600),
@@ -188,6 +194,48 @@ export default async function handler(request) {
 
   if (!isAuthenticated(request)) return reply({ error: "Your admin session expired. Sign in again." }, 401);
   if (action === "check") return reply({ ok: true });
+
+  if (action === "uploadImage") {
+    const imageData = typeof input.imageData === "string" ? input.imageData : "";
+    const imageType = cleanText(input.imageType, 40);
+    if (imageType !== "image/jpeg") return reply({ error: "Photo upload must be a resized JPEG image." }, 400);
+    if (!imageData || imageData.length > 760000 || !/^[A-Za-z0-9+/]+={0,2}$/.test(imageData)) {
+      return reply({ error: "The resized photo is invalid or too large. Choose another photo." }, 413);
+    }
+    const imageBytes = Buffer.from(imageData, "base64");
+    if (!imageBytes.length || imageBytes.length > 540 * 1024 || imageBytes.toString("base64") !== imageData) {
+      return reply({ error: "The photo must be 540 KB or smaller after resizing." }, 413);
+    }
+    const baseName = slug(cleanText(input.imageName, 140).replace(/\.[^.]+$/, "")) || "car-photo";
+    const fileName = baseName.slice(0, 55) + "-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7) + ".jpg";
+    const path = "car-images/" + fileName;
+    try {
+      const url = "https://api.github.com/repos/" + encodeURIComponent(OWNER) + "/" + encodeURIComponent(REPO) +
+        "/contents/" + path.split("/").map(encodeURIComponent).join("/");
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: githubHeaders(),
+        body: JSON.stringify({
+          message: "Upload vehicle photo from admin panel",
+          content: imageData,
+          branch: BRANCH
+        })
+      });
+      if (!response.ok) {
+        const detail = await response.text();
+        return reply({ error: "GitHub could not store the photo (" + response.status + "): " + detail.slice(0, 300) }, 502);
+      }
+      const result = await response.json();
+      return reply({
+        ok: true,
+        path: "/" + path,
+        commit: result.commit && result.commit.sha,
+        message: "Photo uploaded to the repository. Save the car listing to attach it."
+      });
+    } catch (error) {
+      return reply({ error: error.message || "Could not upload this photo." }, 502);
+    }
+  }
   if (action === "load") {
     try {
       const { data } = await readCarsFile();
