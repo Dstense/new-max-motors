@@ -34,6 +34,7 @@ function escapeHTML(value) {
 
 function safeUrl(value) {
   const url = String(value || '').trim();
+  if (/^\/car-images\/[a-z0-9][a-z0-9._-]*\.jpg$/i.test(url)) return url;
   try {
     const parsed = new URL(url);
     return ['https:', 'http:'].includes(parsed.protocol) ? parsed.href : '';
@@ -130,6 +131,9 @@ function updateStats() {
 
 function clearForm() {
   carForm.reset();
+  document.getElementById('carPhotoFile').value = '';
+  updatePhotoPreview('', '');
+  setStatus(document.getElementById('photoUploadStatus'), '', '');
   document.getElementById('carId').value = '';
   document.getElementById('carSource').value = CATALOGUE_URL;
   formTitle.textContent = 'Add a car';
@@ -137,6 +141,76 @@ function clearForm() {
   submitCarButton.innerHTML = 'Add car to website <span aria-hidden="true">→</span>';
   cancelEditButton.hidden = true;
   setStatus(formStatus, '', '');
+}
+
+function updatePhotoPreview(value, name = '') {
+  const path = safeUrl(value);
+  const preview = document.getElementById('photoPreview');
+  const previewImage = document.getElementById('photoPreviewImage');
+  const previewName = document.getElementById('photoPreviewName');
+  const previewMeta = document.getElementById('photoPreviewMeta');
+  if (!path) {
+    preview.hidden = true;
+    previewImage.removeAttribute('src');
+    previewName.textContent = '';
+    previewMeta.textContent = '';
+    return;
+  }
+  previewImage.src = path;
+  previewName.textContent = name || path.split('/').pop() || 'Car photo';
+  previewMeta.textContent = path.startsWith('/car-images/') ? 'Saved in the New Max Motors repository' : 'External image URL';
+  preview.hidden = false;
+}
+
+function fileToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ''));
+    reader.onerror = () => reject(new Error('Could not read this photo. Please choose another image.'));
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function makeUploadImage(file) {
+  if (!file || !/^image\/(jpeg|png|webp)$/i.test(file.type)) {
+    throw new Error('Choose a JPG, PNG or WebP photo.');
+  }
+  if (file.size > 20 * 1024 * 1024) {
+    throw new Error('This photo is over 20 MB. Choose a smaller original image.');
+  }
+  let bitmap;
+  try {
+    bitmap = await createImageBitmap(file);
+  } catch {
+    throw new Error('Could not open this image. Try a JPG or PNG photo instead.');
+  }
+  try {
+    let scale = Math.min(1, 1500 / Math.max(bitmap.width, bitmap.height));
+    const targetBytes = 540 * 1024;
+    let blob = null;
+    const qualities = [0.84, 0.78, 0.72, 0.66, 0.60];
+    for (let attempt = 0; attempt < 12; attempt += 1) {
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+      const context = canvas.getContext('2d', { alpha: false });
+      if (!context) throw new Error('Your browser could not prepare this photo.');
+      context.fillStyle = '#ffffff';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      const quality = qualities[Math.min(attempt % qualities.length, qualities.length - 1)];
+      blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality));
+      if (blob && blob.size <= targetBytes) break;
+      scale *= 0.82;
+    }
+    if (!blob || blob.size > targetBytes) {
+      throw new Error('Could not resize the photo small enough. Try a smaller photo.');
+    }
+    const dataUrl = await fileToDataUrl(blob);
+    return { imageData: dataUrl.split(',')[1], bytes: blob.size };
+  } finally {
+    if (bitmap && typeof bitmap.close === 'function') bitmap.close();
+  }
 }
 
 function startEditing(car) {
@@ -150,6 +224,9 @@ function startEditing(car) {
   document.getElementById('carSpecs').value = Array.isArray(car.specs) ? car.specs.join('\n') : '';
   document.getElementById('carDescription').value = car.description || '';
   document.getElementById('carImage').value = car.imageUrl || '';
+  document.getElementById('carPhotoFile').value = '';
+  updatePhotoPreview(car.imageUrl || '', car.name || '');
+  setStatus(document.getElementById('photoUploadStatus'), '', '');
   document.getElementById('exactPhoto').checked = car.imageLabel === 'VEHICLE PHOTO';
   document.getElementById('carSource').value = car.sourceUrl || CATALOGUE_URL;
   formTitle.textContent = 'Edit car';
@@ -233,7 +310,7 @@ carForm.addEventListener('submit', async (event) => {
     return;
   }
   if (rawImage && !imageUrl) {
-    setStatus(formStatus, 'The car photo must use a valid http:// or https:// image URL.', 'error');
+    setStatus(formStatus, 'Use a valid http:// or https:// image URL, or a photo uploaded through this panel.', 'error');
     return;
   }
   if (rawSource && !sourceUrl) {
@@ -257,6 +334,52 @@ carForm.addEventListener('submit', async (event) => {
     renderInventory();
     setStatus(formStatus, 'Saved to GitHub. Netlify will redeploy the public website.', 'success');
   }
+});
+
+
+document.getElementById('carImage').addEventListener('input', (event) => {
+  updatePhotoPreview(event.currentTarget.value.trim(), '');
+});
+
+document.getElementById('uploadPhotoButton').addEventListener('click', async () => {
+  const fileInput = document.getElementById('carPhotoFile');
+  const file = fileInput.files && fileInput.files[0];
+  const uploadButton = document.getElementById('uploadPhotoButton');
+  const status = document.getElementById('photoUploadStatus');
+  if (!file) {
+    setStatus(status, 'Choose a photo first.', 'error');
+    fileInput.focus();
+    return;
+  }
+  uploadButton.disabled = true;
+  setStatus(status, 'Resizing photo for the website…', '');
+  try {
+    const prepared = await makeUploadImage(file);
+    setStatus(status, 'Uploading photo to GitHub…', '');
+    const result = await callApi({
+      action: 'uploadImage',
+      imageName: file.name || document.getElementById('carName').value || 'car-photo',
+      imageType: 'image/jpeg',
+      imageData: prepared.imageData
+    });
+    document.getElementById('carImage').value = result.path;
+    document.getElementById('exactPhoto').checked = true;
+    updatePhotoPreview(result.path, file.name || 'Uploaded car photo');
+    fileInput.value = '';
+    setStatus(status, 'Photo uploaded (' + Math.round(prepared.bytes / 1024) + ' KB). Save the car listing to attach it. Netlify must finish deploying before the image appears publicly.', 'success');
+  } catch (error) {
+    setStatus(status, error.message || 'Could not upload this photo.', 'error');
+  } finally {
+    uploadButton.disabled = false;
+  }
+});
+
+document.getElementById('clearPhotoButton').addEventListener('click', () => {
+  document.getElementById('carImage').value = '';
+  document.getElementById('carPhotoFile').value = '';
+  document.getElementById('exactPhoto').checked = false;
+  updatePhotoPreview('', '');
+  setStatus(document.getElementById('photoUploadStatus'), 'Photo cleared from this listing. Save the car to apply the change.', '');
 });
 
 cancelEditButton.addEventListener('click', clearForm);
