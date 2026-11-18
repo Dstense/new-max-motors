@@ -8,3 +8,8 @@
   from = "/api/admin-cars"
   to = "/.netlify/functions/admin-cars"
   status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200
