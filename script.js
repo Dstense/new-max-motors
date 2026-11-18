@@ -17,6 +17,7 @@ function escapeHTML(value) {
 
 function safeExternalUrl(value, fallback = '') {
   const url = String(value || '').trim();
+  if (/^\/car-images\/[a-z0-9][a-z0-9._-]*\.jpg$/i.test(url)) return url;
   return /^https?:\/\/[^\s]+$/i.test(url) ? url : fallback;
 }
 
