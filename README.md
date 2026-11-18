@@ -80,3 +80,8 @@ After saving these variables, trigger a new Netlify deploy (environment variable
 - After saving, wait for the Netlify deployment to complete before checking the public homepage. The admin dashboard reads the latest saved inventory directly from GitHub.
 
 The admin form currently accepts **direct HTTP/HTTPS image URLs**; it does not upload image files. The first 17 listings are seeded from the existing featured cards, and catalogue listings with unverified or contradictory prices intentionally remain “Price on request”. Confirm availability, model variant, ownership, registration, mileage, price and photo accuracy before publishing a listing.
+
+
+### Uploading actual vehicle photos
+
+The admin panel includes a photo picker for JPG, PNG and WebP files from a phone or computer. The browser resizes the selected picture to a JPEG of at most 540 KB, then the authenticated Netlify function saves it under `car-images/` in this repository. The uploaded path is filled into the car form automatically; save the car listing afterward so the public inventory points to it. Select the exact-vehicle-photo checkbox only for an actual photo of that vehicle. The new photo and its listing become publicly available after the linked Netlify deployment has finished. The GitHub fine-grained token must have **Contents: Read and write** access. Environment variables and the linked GitHub deployment must be configured first.
